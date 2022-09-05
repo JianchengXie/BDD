@@ -66,7 +66,7 @@ def eliminate_new_zero_within_limit(zeros, doctor_to_patient, cover_rows, cover_
                         cover_cols.append(doc)
 
 
-# mark doc that has more than limit patients favoring
+# mark doctor that has more than limit patients favoring
 def mark_doc(zeros, cover_cols, max_num_patient):
     for doc in range(len(zeros)):
         if len(zeros[doc]) > max_num_patient:
@@ -96,6 +96,7 @@ def main():
     assignment = hungarian(patient_preference.copy(), max_num_patient)
     for doctor in range(len(assignment)):
         print('Doctor ', doctor, 'takes patient(s): ', assignment[doctor])
+
 
 if __name__ == '__main__':
     main()
