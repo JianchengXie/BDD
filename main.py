@@ -1,6 +1,19 @@
 import numpy as np
 
 
+# This algorithm is based on the hungarian algorithm found on wikipedia
+# https://en.wikipedia.org/wiki/Hungarian_algorithm
+# Modification is made to adjust for non-one-to-one doctor-patient-assignment
+#
+# Assumption 1: there are enough doctors for all the patients
+# (num of doc * max num of patients a doctor can handle >= num of patient).
+# Assumption 2: the patient's preference of doctors is strictly ranked from 1 to num of doctor,
+# with no repeat in ranking
+#
+# The basic logic of this algorithm is that: if only one patient sees one doctor as the best option,
+# then assigning this patient to the doctor is the best solution.
+# If multiple patients see one doctor as the best option, then whether their next best options' availability is checked
+# The patient whose next best option not available will get the best option.
 def hungarian(patient_preference, max_num_patient):
     num_doctor = len(patient_preference[0])
     num_patient = len(patient_preference)
@@ -69,7 +82,7 @@ def main():
     #                               [2, 6, 1, 3, 4, 5],
     #                               [6, 5, 4, 3, 2, 1]])
 
-    patient_preference = np.array([[1, 2, 3],
+    patient_preference = np.array([[1, 1, 3],
                                   [1, 2, 3],
                                   [3, 2, 1]])
 
@@ -79,7 +92,7 @@ def main():
     #                                [2, 3, 1],
     #                                [2, 1, 3],
     #                                [3, 2, 1]])
-    max_num_patient = 2  # the maximum number of patients that each doctor can be assigned to
+    max_num_patient = 1  # the maximum number of patients that each doctor can be assigned to
     assignment = hungarian(patient_preference.copy(), max_num_patient)
     for doctor in range(len(assignment)):
         print('Doctor ', doctor, 'takes patient(s): ', assignment[doctor])
