@@ -74,7 +74,8 @@ def mark_doc(zeros, cover_cols, max_num_patient):
 
 
 def main():
-    # row as patient, column as doctor, the lower the number the higher the doctor ranked
+    # patient_preference: row as patient, column as doctor, the lower the number the higher the doctor ranked
+    # Test1
     # patient_preference = np.array([[1, 2, 3, 4, 5, 6],
     #                               [1, 2, 3, 4, 5, 6],
     #                               [1, 3, 4, 6, 5, 2],
@@ -82,17 +83,20 @@ def main():
     #                               [2, 6, 1, 3, 4, 5],
     #                               [6, 5, 4, 3, 2, 1]])
 
-    patient_preference = np.array([[1, 1, 3],
-                                  [1, 2, 3],
-                                  [3, 2, 1]])
-
+    # Test2
     # patient_preference = np.array([[1, 2, 3],
-    #                                [1, 3, 2],
-    #                                [1, 2, 3],
-    #                                [2, 3, 1],
-    #                                [2, 1, 3],
-    #                                [3, 2, 1]])
-    max_num_patient = 1  # the maximum number of patients that each doctor can be assigned to
+    #                               [1, 2, 3],
+    #                               [3, 2, 1]])
+
+    # Test3
+    patient_preference = np.array([[1, 2, 3],
+                                   [1, 3, 2],
+                                   [1, 2, 3],
+                                   [2, 3, 1],
+                                   [2, 1, 3],
+                                   [3, 2, 1]])
+
+    max_num_patient = 2  # the maximum number of patients that each doctor can be assigned to
     assignment = hungarian(patient_preference.copy(), max_num_patient)
     for doctor in range(len(assignment)):
         print('Doctor ', doctor, 'takes patient(s): ', assignment[doctor])
